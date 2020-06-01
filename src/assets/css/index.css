@@ -1,0 +1,40 @@
+.lf {
+    display: flex;
+}
+
+.lf-a {
+    align-items: center;
+}
+
+.lf-j {
+    justify-content: center;
+}
+
+.lf-j-a {
+    justify-content: space-around;
+}
+
+.lf-j-b {
+    justify-content: space-between;
+}
+
+.el-header,
+.el-footer {
+    background-color: #666;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.h185 {
+    height: 185px;
+}
+.h100 {
+    height: 100px;
+}
+
+.h50 {
+    height: 50px;
+}
