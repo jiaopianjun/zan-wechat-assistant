@@ -8,7 +8,7 @@
         <home />
       </el-main>
       <el-footer class="lf lf-a lf-j">
-        <span>demo-demo</span>
+        <span>demo-demo-demo</span>
       </el-footer>
     </el-container>
   </div>
