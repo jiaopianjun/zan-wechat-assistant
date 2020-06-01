@@ -24,6 +24,27 @@
     </el-form>
 
     <!-- 发表类型 1、文字+图片 2、公众号文章+文字 3、第三方链接+文字 -->
+    <el-form ref="parmas" label-position="top" :model="parmas" label-width="80px">
+      <el-form-item label="活动名称">
+        <el-row :gutter="24" class="h100">
+          <el-col :span="16">
+            <el-input v-model="parmas.name" placeholder="请输入昵称" />
+          </el-col>
+          <el-col :span="8" class="lf lf-j">
+            <el-upload
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="parmas.headImg" :src="parmas.headImg" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-col>
+        </el-row>
+      </el-form-item>
+    </el-form>
     <!-- 发表内容 -->
     <!-- 位置 + 时间 -->
     <!-- 展示选择 -->
