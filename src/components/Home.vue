@@ -22,7 +22,6 @@
         </el-row>
       </el-form-item>
     </el-form>
-
     <!-- 发表类型 1、文字+图片 2、公众号文章+文字 3、第三方链接+文字 -->
     <el-form ref="parmas" label-position="top" :model="parmas" label-width="80px">
       <el-form-item label="活动名称">
