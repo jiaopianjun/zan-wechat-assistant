@@ -15,14 +15,14 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
+import Home from "./components/Home.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Home
   }
-}
+};
 </script>
 
 <style>
@@ -32,10 +32,11 @@ body {
 }
 </style>
 <style scoped>
-  .el-header, .el-footer {
-    background-color: #686E89;
-    color: #fff;
-    text-align: center;
-    line-height: 60px;
-  }
+.el-header,
+.el-footer {
+  background-color: #686e89;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+}
 </style>

@@ -11,7 +11,7 @@
             <el-upload
               class="avatar-uploader"
               :show-file-list="false"
-              :on-success="handleAvatarSuccess"
+              action
               :before-upload="beforeAvatarUpload"
             >
               <img v-if="parmas.headImg" :src="parmas.headImg" class="avatar" />
@@ -20,24 +20,85 @@
           </el-col>
         </el-row>
       </el-form-item>
+      <!-- 发表类型1、自己相册可见头像 2、可看赞数量 3、文字赞无头绪-->
+      <el-form-item label="选择类型">
+        <el-row :gutter="24" class="h100">
+          <el-col :span="16">
+            <el-radio-group v-model="parmas.zanType" type="button">
+              <!-- <el-radio-button :label="1">头像赞</el-radio-button>
+              <el-radio-button :label="2">文字赞</el-radio-button>
+              <el-radio-button :label="3">数量赞</el-radio-button>-->
+            </el-radio-group>
+          </el-col>
+        </el-row>
+      </el-form-item>
+      <!-- 发表类型 1、文字+图片 2、公众号文章+文字 3、第三方链接+文字 -->
+      <el-form-item label="选择类型">
+        <el-row :gutter="24" class="h100">
+          <el-col :span="16">
+            <el-radio-group v-model="parmas.contentType" type="button">
+              <!-- <el-radio-button :label="1">文字+图片</el-radio-button>
+              <el-radio-button :label="2">公众号文章+文字</el-radio-button>
+              <el-radio-button :label="3">第三方链接+文字</el-radio-button>-->
+            </el-radio-group>
+          </el-col>
+        </el-row>
+      </el-form-item>
+      <!-- 发表内容 图文 -->
+      <el-form-item label="内容">
+        <el-row :gutter="24">
+          <el-col :span="16">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 2, maxRows: 4}"
+              placeholder="请输入内容"
+              v-model="parmas.content"
+            ></el-input>
+          </el-col>
+        </el-row>
+        <el-row :gutter="24">
+          <el-col :span="16">
+            <div class="pic">
+              <div class="imgPic" v-for="(list, index) in parmas.imgList" :key="index">
+                <el-image shape="square" :size="100" fit="cover" :src="list"></el-image>
+                <svg
+                  t="1591252056691"
+                  class="delImg"
+                  @click="delImg(index)"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="3181"
+                  width="800"
+                  height="800"
+                >
+                  <path
+                    d="M512 32C246.4 32 32 246.4 32 512s214.4 480 480 480 480-214.4 480-480S777.6 32 512 32m201.6 681.6c-12.8 12.8-35.2 12.8-48 0L512 560l-153.6 153.6c-12.8 12.8-35.2 12.8-48 0-12.8-12.8-12.8-35.2 0-48l153.6-153.6-153.6-153.6c-12.8-12.8-12.8-35.2 0-48 12.8-12.8 35.2-12.8 48 0l153.6 153.6 153.6-153.6c12.8-12.8 35.2-12.8 48 0 12.8 12.8 12.8 35.2 0 48L560 512l153.6 153.6c16 12.8 16 35.2 0 48m0 0z"
+                    fill="#F56C6C"
+                    p-id="3182"
+                  />
+                </svg>
+              </div>
+              <el-upload
+                class="avatar-uploader"
+                v-if="parmas.imgList.length < 9"
+                :show-file-list="false"
+                action
+                :before-upload="uploadImgList"
+              >
+                <i class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </div>
+          </el-col>
+        </el-row>
+      </el-form-item>
+      <!-- 位置 + 时间 -->
+      <!-- 展示选择 -->
+      <!-- 集赞数量 -->
+      <!-- 评论数量 -->
+      <!-- 截图时间 -->
+      <!-- 生成 -->
     </el-form>
-    <!-- 发表类型 1、文字+图片 2、公众号文章+文字 3、第三方链接+文字 -->
-    <el-form-item label="选择类型">
-      <el-row :gutter="24" class="h100">
-        <el-radio-group v-model="radio">
-          <el-radio :label="1">样式一</el-radio>
-          <el-radio :label="2">样式二</el-radio>
-          <el-radio :label="3">样式三</el-radio>
-        </el-radio-group>
-      </el-row>
-    </el-form-item>
-    <!-- 发表内容 -->
-    <!-- 位置 + 时间 -->
-    <!-- 展示选择 -->
-    <!-- 集赞数量 -->
-    <!-- 评论数量 -->
-    <!-- 截图时间 -->
-    <!-- 生成 -->
   </div>
 </template>
 
@@ -48,38 +109,44 @@ export default {
     return {
       parmas: {
         name: "",
-        headImg: ""
+        headImg: "",
+        zanType: 1,
+        contentType: 1,
+        content: "",
+        imgList: []
       }
     };
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
     beforeAvatarUpload(file) {
       let _this = this;
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = function() {
         _this.parmas.headImg = this.result;
       };
-      return isJPG && isLt2M;
+    },
+    uploadImgList(file) {
+      let _this = this;
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        _this.parmas.imgList.push(this.result);
+      };
+    },
+    delImg(index) {
+      this.parmas.imgList.splice(index, 1);
     }
   }
 };
 </script>
 <style>
 .home {
-  height: 500px;
+  min-height: 500px;
+}
+.avatar-uploader {
+  height: 100px;
+  width: 100px;
 }
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
@@ -104,5 +171,31 @@ export default {
   width: 100px;
   height: 100px;
   display: block;
+}
+.pic {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+.imgPic {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 15px 15px 0;
+  box-sizing: border-box;
+  border: 1px solid #e8eaec;
+}
+.imgPic img,
+.imgPic .el-image {
+  width: 100%;
+  height: 100%;
+}
+.imgPic .delImg {
+  position: absolute;
+  cursor: pointer;
+  right: -10px;
+  top: -10px;
+  width: 20px;
+  height: 20px;
 }
 </style>
