@@ -25,9 +25,9 @@
         <el-row :gutter="24" class="h100">
           <el-col :span="16">
             <el-radio-group v-model="parmas.zanType" type="button">
-              <!-- <el-radio-button :label="1">头像赞</el-radio-button>
+              <el-radio-button :label="1">头像赞</el-radio-button>
               <el-radio-button :label="2">文字赞</el-radio-button>
-              <el-radio-button :label="3">数量赞</el-radio-button>-->
+              <el-radio-button :label="3">数量赞</el-radio-button>
             </el-radio-group>
           </el-col>
         </el-row>
@@ -37,20 +37,19 @@
         <el-row :gutter="24" class="h100">
           <el-col :span="16">
             <el-radio-group v-model="parmas.contentType" type="button">
-              <!-- <el-radio-button :label="1">文字+图片</el-radio-button>
+              <el-radio-button :label="1">文字+图片</el-radio-button>
               <el-radio-button :label="2">公众号文章+文字</el-radio-button>
-              <el-radio-button :label="3">第三方链接+文字</el-radio-button>-->
             </el-radio-group>
           </el-col>
         </el-row>
       </el-form-item>
       <!-- 发表内容 图文 -->
-      <el-form-item label="内容">
+      <el-form-item label="图文" v-if="parmas.contentType === 1">
         <el-row :gutter="24">
           <el-col :span="16">
             <el-input
               type="textarea"
-              :autosize="{ minRows: 2, maxRows: 4}"
+              :autosize="{ minRows: 4, maxRows: 20}"
               placeholder="请输入内容"
               v-model="parmas.content"
             ></el-input>
@@ -92,6 +91,47 @@
           </el-col>
         </el-row>
       </el-form-item>
+      <!-- 转发文章 -->
+      <el-form-item label="转发文章" v-if="parmas.contentType === 2">
+        <el-row :gutter="24" class="mb-20">
+          <el-col :span="16">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 4, maxRows: 20}"
+              placeholder="请输入内容(可为空)"
+              v-model="parmas.link.text"
+            ></el-input>
+          </el-col>
+        </el-row>
+        <el-row class="mb-20">
+          <el-radio-group v-model="parmas.linkType" type="button">
+            <el-radio-button :label="1">微信链接</el-radio-button>
+            <el-radio-button :label="2">自定义链接</el-radio-button>
+          </el-radio-group>
+        </el-row>
+        <el-row class="mb-20" v-if="parmas.linkType === 1">
+          <el-col :span="16">
+            <el-input type="text" placeholder="请输入微信文章链接" v-model="parmas.link.url"></el-input>
+          </el-col>
+        </el-row>
+        <el-row :gutter="24" class="mb-20" v-if="parmas.linkType === 2">
+          <el-col :span="16">
+            <el-input v-model="parmas.link.linkText" placeholder="请输入自定义链接文字" />
+          </el-col>
+          <el-col :span="8" class="lf lf-j">
+            <el-upload
+              class="avatar-uploader"
+              :show-file-list="false"
+              action
+              :before-upload="linkIcon"
+            >
+              <img v-if="parmas.link.linkImg" :src="parmas.link.linkImg" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-col>
+        </el-row>
+      </el-form-item>
+
       <!-- 位置 + 时间 -->
       <!-- 展示选择 -->
       <!-- 集赞数量 -->
@@ -113,7 +153,16 @@ export default {
         zanType: 1,
         contentType: 1,
         content: "",
-        imgList: []
+        imgList: [],
+        linkType: 1,
+        link : {
+          url: '',
+          text: '',
+          linkImg: '',
+          linkText: ''
+        },
+
+        
       }
     };
   },
@@ -136,6 +185,14 @@ export default {
     },
     delImg(index) {
       this.parmas.imgList.splice(index, 1);
+    },
+    linkIcon(file) {
+      let _this = this;
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        _this.parmas.link.linkImg = this.result;
+      };
     }
   }
 };
