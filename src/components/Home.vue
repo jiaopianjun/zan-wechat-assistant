@@ -156,10 +156,19 @@
         <el-switch v-model="parmas.isCommit" active-text="是" inactive-text="否"></el-switch>
       </el-form-item>
       <el-form-item label="评论设置">
-        <div>
-          <el-input v-model="parmas.name" class="mb-10" placeholder="请输入昵称" />
-          <el-input v-model="parmas.name" class="mb-10" placeholder="请输入评论内容" />
-          <el-input v-model="parmas.name" class="mb-10" placeholder="请输入评论时间" />
+        <div v-for="(list, index) in parmas.commit" :key="index">
+          <el-input v-model="list.name" class="mb-10" placeholder="请输入昵称" />
+          <el-input v-model="list.text" class="mb-10" placeholder="请输入评论内容" />
+          <el-input v-model="list.time" class="mb-10" placeholder="请输入评论时间" />
+          <el-upload
+              class="avatar-uploader"
+              :show-file-list="false"
+              action
+              :before-upload="upCommitAvator(index)"
+            >
+              <img v-if="list.avator" :src="parmas.link.linkImg" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
         </div>
         <el-button type="primary" round style="width: 100%" class="mt-15">添加评论</el-button>
       </el-form-item>
@@ -191,7 +200,15 @@ export default {
         location: "",
         time: "",
         zanNum: 1,
-        isCommit: false
+        isCommit: false,
+        commit: [
+          {
+            avator: '',
+            name: '',
+            text: '',
+            time: ''
+          }
+        ]
       }
     };
   },
