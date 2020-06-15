@@ -155,22 +155,41 @@
       <el-form-item label="是否评论">
         <el-switch v-model="parmas.isCommit" active-text="是" inactive-text="否"></el-switch>
       </el-form-item>
-      <el-form-item label="评论设置">
+      <el-form-item label="评论设置" v-if="parmas.isCommit">
         <div v-for="(list, index) in parmas.commit" :key="index">
-          <el-input v-model="list.name" class="mb-10" placeholder="请输入昵称" />
-          <el-input v-model="list.text" class="mb-10" placeholder="请输入评论内容" />
-          <el-input v-model="list.time" class="mb-10" placeholder="请输入评论时间" />
-          <el-upload
-              class="avatar-uploader"
-              :show-file-list="false"
-              action
-              :before-upload="upCommitAvator(index)"
-            >
-              <img v-if="list.avator" :src="parmas.link.linkImg" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
+          <el-row class="lf lf-j-a mb-10">
+            <el-col :span="18" class="mr-20">
+              <el-input v-model="list.name" placeholder="请输入昵称" />
+            </el-col>
+            <el-col :span="6">
+              <el-date-picker v-model="list.time" type="datetime" placeholder="请输入评论时间"></el-date-picker>
+              <el-button type="danger" icon="el-icon-delete" circle class="ml-20" @click="delCommit(index)"></el-button>
+            </el-col>
+          </el-row>
+          <el-row class="lf lf-j-a mb-10">
+            <el-col :span="18" class="mr-20">
+              <el-input
+                v-model="list.text"
+                type="textarea"
+                :autosize="{ minRows: 4, maxRows: 20}"
+                class="mb-10"
+                placeholder="请输入评论内容"
+              />
+            </el-col>
+            <el-col :span="6">
+              <el-upload
+                class="avatar-uploader"
+                :show-file-list="false"
+                action
+                :before-upload="upCommitAvator(index)"
+              >
+                <img v-if="list.avator" :src="parmas.link.linkImg" class="avatar" />
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-col>
+          </el-row>
         </div>
-        <el-button type="primary" round style="width: 100%" class="mt-15">添加评论</el-button>
+        <el-button type="primary" round style="width: 100%" class="mt-15" @click="addCommit">添加评论</el-button>
       </el-form-item>
       <!-- 截图时间 -->
       <!-- 生成 -->
@@ -203,10 +222,10 @@ export default {
         isCommit: false,
         commit: [
           {
-            avator: '',
-            name: '',
-            text: '',
-            time: ''
+            avator: "",
+            name: "",
+            text: "",
+            time: ""
           }
         ]
       }
@@ -242,6 +261,27 @@ export default {
     },
     handleChange(value) {
       this.parmas.zanNum = value;
+    },
+    // 添加评论
+    addCommit() {
+      let parmas = {
+        avator: "",
+        name: "",
+        text: "",
+        time: ""
+      };
+      this.parmas.commit.push(parmas)
+    },
+    // 删除评论
+    delCommit(index) {
+      this.parmas.commit.splice(index, 1)
+      if (this.parmas.commit.length === 0) {
+        this.parmas.isCommit = false
+      }
+    },
+    // 评论头像
+    upCommitAvator(index) {
+      console.log(index);
     }
   }
 };
