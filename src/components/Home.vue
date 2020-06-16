@@ -21,10 +21,10 @@
         </el-row>
       </el-form-item>
       <!-- 发表类型1、自己相册可见头像 2、可看赞数量 3、文字赞无头绪-->
-      <el-form-item label="选择类型">
+      <el-form-item label="选择集赞类型">
         <el-row :gutter="24" class="h100">
           <el-col>
-            <el-radio-group v-model="parmas.zanType" type="button">
+            <el-radio-group v-model="parmas.zanType" type="button" @change="selectZanType">
               <el-radio-button :label="1">头像赞</el-radio-button>
               <el-radio-button :label="2">文字赞</el-radio-button>
               <el-radio-button :label="3">数量赞</el-radio-button>
@@ -33,12 +33,12 @@
         </el-row>
       </el-form-item>
       <!-- 发表类型 1、文字+图片 2、公众号文章+文字 3、第三方链接+文字 -->
-      <el-form-item label="选择类型">
+      <el-form-item label="选择内容类型">
         <el-row :gutter="24" class="h100">
           <el-col>
             <el-radio-group v-model="parmas.contentType" type="button">
               <el-radio-button :label="1">文字+图片</el-radio-button>
-              <el-radio-button :label="2">公众号文章+文字</el-radio-button>
+              <el-radio-button :label="2" v-if="parmas.zanType !== 3">公众号文章+文字</el-radio-button>
             </el-radio-group>
           </el-col>
         </el-row>
@@ -132,27 +132,47 @@
         </el-row>
       </el-form-item>
       <!-- 位置 + 时间 -->
-      <el-form-item label="位置+时间">
-        <el-col :span="8" class="mr-20">
-          <el-input type="text" placeholder="请输入位置" v-model="parmas.location"></el-input>
+      <el-row :gutter="24">
+        <el-col :span="12">
+          <el-form-item label="位置">
+            <el-input type="text" placeholder="请输入位置" v-model="parmas.location"></el-input>
+          </el-form-item>
         </el-col>
-        <el-col :span="8">
-          <el-date-picker v-model="parmas.time" type="datetime" placeholder="选择日期时间"></el-date-picker>
+        <el-col :span="12">
+          <el-form-item label="时间">
+            <el-date-picker v-model="parmas.time" type="datetime" placeholder="选择日期时间"></el-date-picker>
+          </el-form-item>
         </el-col>
-      </el-form-item>
+      </el-row>
       <!-- 集赞数量 -->
-      <el-form-item label="集赞数量">
-        <el-input-number
-          v-model="parmas.zanNum"
-          @change="handleChange"
-          :min="1"
-          :max="1000"
-          label="请输入集赞数量"
-        ></el-input-number>
-      </el-form-item>
+      <el-row :gutter="24">
+        <el-col :span="12">
+          <el-form-item label="赞数量">
+            <el-input-number
+              v-model="parmas.zanNum"
+              @change="handleChange"
+              :min="1"
+              :max="1000"
+              label="请输入集赞数量"
+            ></el-input-number>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="评论数量" v-if="parmas.zanType === 3">
+            <el-input-number
+              v-model="parmas.commitNum"
+              @change="handleChange"
+              :min="1"
+              :max="1000"
+              label="请输入评论数量"
+            ></el-input-number>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
       <!-- 评论模块 -->
       <!-- 是否评论 -->
-      <el-form-item label="是否评论">
+      <el-form-item label="是否评论" v-if="parmas.zanType !== 3">
         <el-switch v-model="parmas.isCommit" active-text="是" inactive-text="否"></el-switch>
       </el-form-item>
       <el-form-item label="评论设置" v-if="parmas.isCommit">
@@ -162,8 +182,14 @@
               <el-input v-model="list.name" placeholder="请输入昵称" />
             </el-col>
             <el-col :span="6">
-              <el-date-picker v-model="list.time" type="datetime" placeholder="请输入评论时间"></el-date-picker>
-              <el-button type="danger" icon="el-icon-delete" circle class="ml-20" @click="delCommit(index)"></el-button>
+              <el-date-picker v-model="list.time" type="datetime" placeholder="评论时间" class="w120"></el-date-picker>
+              <el-button
+                type="danger"
+                icon="el-icon-delete"
+                circle
+                class="ml-10"
+                @click="delCommit(index)"
+              ></el-button>
             </el-col>
           </el-row>
           <el-row class="lf lf-j-a mb-10">
@@ -181,9 +207,10 @@
                 class="avatar-uploader"
                 :show-file-list="false"
                 action
+                v-if="list.avator !== undefined"
                 :before-upload="upCommitAvator(index)"
               >
-                <img v-if="list.avator" :src="parmas.link.linkImg" class="avatar" />
+                <img v-if="list.avator" :src="list.avator" class="avatar" />
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-col>
@@ -191,7 +218,20 @@
         </div>
         <el-button type="primary" round style="width: 100%" class="mt-15" @click="addCommit">添加评论</el-button>
       </el-form-item>
-      <!-- 截图时间 -->
+      <!-- 是否通知栏 -->
+      <el-form-item label="是否有通知栏">
+        <el-switch v-model="parmas.isNavbar" active-text="是" inactive-text="否"></el-switch>
+      </el-form-item>
+      <el-form-item label="通知栏类型" v-if="parmas.isNavbar">
+        <el-row :gutter="24" class="h100">
+          <el-col>
+            <el-radio-group v-model="parmas.navbarType" type="button">
+              <el-radio-button :label="0">安卓</el-radio-button>
+              <el-radio-button :label="1">苹果</el-radio-button>
+            </el-radio-group>
+          </el-col>
+        </el-row>
+      </el-form-item>
       <!-- 生成 -->
     </el-form>
   </div>
@@ -219,15 +259,18 @@ export default {
         location: "",
         time: "",
         zanNum: 1,
+        commitNum: 1,
         isCommit: false,
-        commit: [
-          {
-            avator: "",
-            name: "",
-            text: "",
-            time: ""
-          }
-        ]
+        commit: [],
+        navbarType: 0, // 0 安卓 1 苹果
+        isNavbar: false,
+        navBar: {
+          time: "",
+          battery: "",
+          signal: "",
+          isp: "",
+          bluetooth: ""
+        }
       }
     };
   },
@@ -239,6 +282,14 @@ export default {
       reader.onload = function() {
         _this.parmas.headImg = this.result;
       };
+    },
+    // 选择赞类型
+    selectZanType(e) {
+      if (e == 3) {
+        this.parmas.contentType = 1;
+      }
+      this.parmas.commit = [];
+      this.parmas.isCommit = false;
     },
     uploadImgList(file) {
       let _this = this;
@@ -264,19 +315,28 @@ export default {
     },
     // 添加评论
     addCommit() {
-      let parmas = {
-        avator: "",
-        name: "",
-        text: "",
-        time: ""
-      };
-      this.parmas.commit.push(parmas)
+      let parmas = {};
+      if (this.parmas.zanType === 1) {
+        parmas = {
+          avator: "",
+          name: "",
+          text: "",
+          time: ""
+        };
+      } else if (this.parmas.zanType === 2) {
+        parmas = {
+          name: "",
+          text: "",
+          time: ""
+        };
+      }
+      this.parmas.commit.push(parmas);
     },
     // 删除评论
     delCommit(index) {
-      this.parmas.commit.splice(index, 1)
+      this.parmas.commit.splice(index, 1);
       if (this.parmas.commit.length === 0) {
-        this.parmas.isCommit = false
+        this.parmas.isCommit = false;
       }
     },
     // 评论头像
@@ -287,8 +347,17 @@ export default {
 };
 </script>
 <style>
+body {
+  background: #d9d9d9;
+}
 .home {
   min-height: 500px;
+  width: 750px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 15px;
+  background: #fff;
+  border-radius: 4px;
 }
 .avatar-uploader {
   height: 100px;

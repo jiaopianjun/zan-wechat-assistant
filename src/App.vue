@@ -39,4 +39,8 @@ body {
   text-align: center;
   line-height: 60px;
 }
+.el-main {
+  padding: 20px 0;
+  margin: 0;
+}
 </style>

@@ -31,6 +31,9 @@
 .ml-20 {
     margin-left: 20px;
 }
+.ml-10 {
+    margin-left: 10px;
+}
 .mr-20 {
     margin-right: 20px;
 }
@@ -49,4 +52,7 @@
 
 .h50 {
     height: 50px;
+}
+.w120 {
+    width: 120px !important;
 }
