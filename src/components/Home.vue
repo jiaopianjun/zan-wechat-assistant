@@ -15,7 +15,7 @@
               :before-upload="beforeAvatarUpload"
             >
               <img v-if="parmas.headImg" :src="parmas.headImg" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <el-button icon="el-icon-upload" v-else type="primary">微信头像</el-button>
             </el-upload>
           </el-col>
         </el-row>
@@ -85,7 +85,7 @@
                 action
                 :before-upload="uploadImgList"
               >
-                <i class="el-icon-plus avatar-uploader-icon"></i>
+                <el-button icon="el-icon-upload" type="primary">上传图片</el-button>
               </el-upload>
             </div>
           </el-col>
@@ -126,7 +126,7 @@
               :before-upload="linkIcon"
             >
               <img v-if="parmas.link.linkImg" :src="parmas.link.linkImg" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <el-button v-else type="primary">网页icon</el-button>
             </el-upload>
           </el-col>
         </el-row>
@@ -139,7 +139,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="时间">
+          <el-form-item label="发布时间">
             <el-date-picker v-model="parmas.time" type="datetime" placeholder="选择日期时间"></el-date-picker>
           </el-form-item>
         </el-col>
@@ -211,12 +211,12 @@
                 :before-upload="upCommitAvator(index)"
               >
                 <img v-if="list.avator" :src="list.avator" class="avatar" />
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                <el-button v-else type="primary" icon="el-icon-upload">微信头像</el-button>
               </el-upload>
             </el-col>
           </el-row>
         </div>
-        <el-button type="primary" round style="width: 100%" class="mt-15" @click="addCommit">添加评论</el-button>
+        <el-button type="primary" round style="width: 100%" class="mt-15" @click="addCommit" icon="el-icon-circle-plus">添加评论</el-button>
       </el-form-item>
       <!-- 是否通知栏 -->
       <el-form-item label="是否有通知栏">
@@ -360,13 +360,16 @@ body {
   border-radius: 4px;
 }
 .avatar-uploader {
-  height: 100px;
-  width: 100px;
-}
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
+  /* height: 100px;
+  width: 100px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
   box-sizing: border-box;
   border-radius: 6px;
+  /* border: 1px dashed #d9d9d9; */
+}
+.avatar-uploader .el-upload {
   cursor: pointer;
   position: relative;
   overflow: hidden;
