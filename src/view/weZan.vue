@@ -216,7 +216,14 @@
             </el-col>
           </el-row>
         </div>
-        <el-button type="primary" round style="width: 100%" class="mt-15" @click="addCommit" icon="el-icon-circle-plus">添加评论</el-button>
+        <el-button
+          type="primary"
+          round
+          style="width: 100%"
+          class="mt-15"
+          @click="addCommit"
+          icon="el-icon-circle-plus"
+        >添加评论</el-button>
       </el-form-item>
       <!-- 是否通知栏 -->
       <el-form-item label="是否有通知栏">
@@ -233,11 +240,88 @@
         </el-row>
       </el-form-item>
       <!-- 生成 -->
+      <el-button round style="width: 100%" type="primary">生成</el-button>
     </el-form>
+
+    <!-- 文字点赞 -->
+    <div class="cellBox">
+      <!-- 通知栏 -->
+      <div class="phoneBar"></div>
+      <!-- 朋友圈背景 -->
+      <div class="momentsBg">
+        <!-- 顶部返回 -->
+        <div class="bgTop">
+          <span class="back"></span>
+          <span class="camera"></span>
+        </div>
+        <!-- 用户名字头像 -->
+        <div class="userInfo">
+          <span class="name"></span>
+          <span class="headPic"></span>
+        </div>
+      </div>
+      <!-- 朋友的新动态 -->
+      <div class="newDynamic">
+        <span>朋友的新动态</span>
+        <div class="newDynamicHeadPid"></div>
+      </div>
+      <!-- 假的新发布的内容 -->
+      <!-- 要赞的内容 -->
+      <div class="dynamicList">
+        <div class="content">
+          <div class="userHeadPic"></div>
+          <div class="userContent">
+            <p class="userName"></p>
+            <!-- 内容-图文 -->
+            <div class="subBox picText">
+              <div class="userText"></div>
+              <div class="userPic"></div>
+            </div>
+            <!-- 内容-链接 -->
+            <div class="subBox linkText">
+              <div class="userText"></div>
+              <div class="linkBox">
+                <span class="linkBoxIcon"></span>
+                <span class="linkBoxText">这是链接</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 位置 -->
+        <div class="site">苏州</div>
+        <!-- 时间 -->
+        <div class="time">
+          <span>7分钟前</span>
+          <span></span>
+        </div>
+        <!-- 赞 -->
+        <div class="zanBox">
+          <span class="zanIcon"></span>
+          <span>Lie</span>,
+        </div>
+        <!-- 评论 -->
+        <div class="commitBox">
+          <div class="commitList">
+            <span class="commitName">Lie:</span>
+            <span>这是评论</span>
+          </div>
+        </div>
+      </div>
+      <!-- 假的新发布的内容 -->
+    </div>
+    <!-- 生成弹窗 -->
+    <el-dialog title="下载" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <div></div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import html2canvas from "html2canvas";
 export default {
   name: "home",
   data() {
@@ -271,7 +355,8 @@ export default {
           isp: "",
           bluetooth: ""
         }
-      }
+      },
+      dialogVisible: true
     };
   },
   methods: {
@@ -342,6 +427,16 @@ export default {
     // 评论头像
     upCommitAvator(index) {
       console.log(index);
+    },
+    // 生成截图
+    screenHot() {
+      html2canvas(this.$refs.imageWrapper).then(canvas => {
+        let dataURL = canvas.toDataURL("image/png");
+        this.imgUrl = dataURL;
+        if (this.imgUrl !== "") {
+          this.dialogTableVisible = true;
+        }
+      });
     }
   }
 };

@@ -5,7 +5,7 @@
         <span>demo</span>
       </el-header>
       <el-main>
-        <home />
+        <weZan />
       </el-main>
       <el-footer class="lf lf-a lf-j">
         <span>demo-demo-demo</span>
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import Home from "./components/Home.vue";
+import weZan from "./view/weZan.vue";
 
 export default {
   name: "App",
   components: {
-    Home
+    weZan
   }
 };
 </script>
