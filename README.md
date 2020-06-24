@@ -1,24 +1,19 @@
 # zan-wechat
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
+## 微信朋友圈集赞
 ```
-npm run serve
+支持多种集赞样式
+快速生成1000+赞
+支持评论
+敬请期待..
 ```
+## 集赞小程序
 
-### Compiles and minifies for production
-```
-npm run build
-```
+> 微信搜索
 
-### Lints and fixes files
-```
-npm run lint
-```
+随你赞
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+小夭塔
+
+[介绍看这里](https://web.lieme.cn/xyt/index.html)
