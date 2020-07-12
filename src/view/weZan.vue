@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- 昵称头像 -->
-    <el-form ref="parmas" label-position="top" :model="parmas" label-width="80px">
+    <el-form ref="parmas" label-position="top" :model="parmas" label-width="80px" v-if="true">
       <el-form-item label="微信昵称和头像">
         <el-row :gutter="24" class="h100">
           <el-col :span="16">
@@ -240,15 +240,18 @@
         </el-row>
       </el-form-item>
       <!-- 生成 -->
-      <el-button round style="width: 100%" type="primary">生成</el-button>
+      <el-button round style="width: 100%" type="primary" @click="screenHot">生成</el-button>
     </el-form>
 
     <!-- 文字点赞 -->
-    <div class="cellBox">
+    <div class="cellBox" ref="imageWrapper" id="imageWrapper">
       <!-- 通知栏 -->
       <div class="phoneBar"></div>
       <!-- 朋友圈背景 -->
       <div class="momentsBg">
+        <div class="bgBox">
+          <img src="../assets/image/default/bg.jpeg" alt="">
+        </div>
         <!-- 顶部返回 -->
         <div class="bgTop">
           <span class="back"></span>
@@ -256,62 +259,71 @@
         </div>
         <!-- 用户名字头像 -->
         <div class="userInfo">
-          <span class="name"></span>
-          <span class="headPic"></span>
+          <span class="name">Lie</span>
+          <span class="headPic">
+            <img src="../assets/image/default/avator.jpg" alt="">
+          </span>
         </div>
       </div>
       <!-- 朋友的新动态 -->
       <div class="newDynamic">
         <span>朋友的新动态</span>
-        <div class="newDynamicHeadPid"></div>
+        <img src="../assets/image/default/avator.jpg" class="newDynamicHeadPid" alt="">
       </div>
       <!-- 假的新发布的内容 -->
       <!-- 要赞的内容 -->
       <div class="dynamicList">
         <div class="content">
-          <div class="userHeadPic"></div>
+          <div class="userHeadPic">
+            <img src="../assets/image/default/avator.jpg" alt="">
+          </div>
           <div class="userContent">
-            <p class="userName"></p>
+            <p class="userName">Lie</p>
             <!-- 内容-图文 -->
             <div class="subBox picText">
-              <div class="userText"></div>
-              <div class="userPic"></div>
+              <div class="userText">这是文字今天下雨哈。明天下雨哈，什么时候不下雨哈。😭这是文字今天下雨哈。明天下雨哈，什么时候不下雨哈。😭这是文字今天下雨哈。明天下雨哈，什么时候不下雨哈。😭</div>
+              <div class="userPic onePic">
+                <img src="../assets/image/default/bg.jpeg" alt="">
+              </div>
             </div>
             <!-- 内容-链接 -->
-            <div class="subBox linkText">
+            <div class="subBox linkText" v-if="false">
               <div class="userText"></div>
               <div class="linkBox">
                 <span class="linkBoxIcon"></span>
                 <span class="linkBoxText">这是链接</span>
               </div>
             </div>
+            <!-- 位置 -->
+            <div class="site">苏州</div>
+            <!-- 时间 -->
+            <div class="time">
+              <span>7分钟前</span>
+              <span class="timeIcon"></span>
+            </div>
+            <!-- 赞 -->
+            <div class="zanBox">
+              <span class="zanIcon"></span>
+              <span>Lie</span>,
+            </div>
+            <!-- 评论 -->
+            <div class="commitBox" v-if="false">
+              <div class="commitList">
+                <span class="commitName">Lie:</span>
+                <span>这是评论</span>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- 位置 -->
-        <div class="site">苏州</div>
-        <!-- 时间 -->
-        <div class="time">
-          <span>7分钟前</span>
-          <span></span>
-        </div>
-        <!-- 赞 -->
-        <div class="zanBox">
-          <span class="zanIcon"></span>
-          <span>Lie</span>,
-        </div>
-        <!-- 评论 -->
-        <div class="commitBox">
-          <div class="commitList">
-            <span class="commitName">Lie:</span>
-            <span>这是评论</span>
-          </div>
-        </div>
+
       </div>
       <!-- 假的新发布的内容 -->
     </div>
     <!-- 生成弹窗 -->
-    <el-dialog title="下载" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-      <div></div>
+    <el-dialog title="下载" :visible.sync="dialogVisible" width="80%">
+      <div class="dialog">
+        <img :src="imgUrl" alt="">
+      </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -356,7 +368,8 @@ export default {
           bluetooth: ""
         }
       },
-      dialogVisible: true
+      imgUrl: '',
+      dialogVisible: false
     };
   },
   methods: {
@@ -430,17 +443,39 @@ export default {
     },
     // 生成截图
     screenHot() {
-      html2canvas(this.$refs.imageWrapper).then(canvas => {
+
+
+      window.pageYOffset = 0;
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+
+      var canvas2 = document.createElement("imageWrapper");
+      let _canvas = document.querySelector('#imageWrapper');
+      var w = parseInt(window.getComputedStyle(_canvas).width);
+      var h = parseInt(window.getComputedStyle(_canvas).height);
+
+      canvas2.style.width = w + "px";
+      canvas2.style.height = h + "px";
+
+
+      let _this = this;
+      html2canvas(this.$refs.imageWrapper,{
+        backgroundColor: null //避免图片有白色边框
+    },{canvas:canvas2},{useCORS:true,logging:true}).then(canvas => {
         let dataURL = canvas.toDataURL("image/png");
-        this.imgUrl = dataURL;
-        if (this.imgUrl !== "") {
-          this.dialogTableVisible = true;
+        _this.imgUrl = dataURL;
+        if (_this.imgUrl !== "") {
+          _this.dialogVisible = true;
         }
       });
     }
   }
 };
 </script>
+
+<style lang="sass" scoped>
+  @import ../assets/css/zan.scss
+</style>
 <style>
 body {
   background: #d9d9d9;
