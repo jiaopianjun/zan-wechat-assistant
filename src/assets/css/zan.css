@@ -1,6 +1,6 @@
 .cellBox {
   width: 100%;
-  height: 1500px;
+  min-height: 100px;
   background: #fff;
   margin: 0 auto;
   box-sizing: border-box;
@@ -82,8 +82,7 @@
 }
 
 .cellBox .momentsBg .userInfo .headPic img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
 }
 
 .cellBox .momentsBg .userInfo .name {
@@ -130,8 +129,7 @@
 }
 
 .cellBox .dynamicList .content .userHeadPic img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
 }
 
 .cellBox .dynamicList .content .userContent {
@@ -153,18 +151,30 @@
 }
 
 .cellBox .dynamicList .content .userContent .onePic img {
-  max-width: 50%;
+  max-width: 65%;
+}
+
+.cellBox .dynamicList .content .userContent .morePic {
+  display: grid;
+  grid-template-columns: 150px 150px 140px;
+  max-width: 72%;
+}
+
+.cellBox .dynamicList .content .userContent .morePic img {
+  width: 140px;
+  height: 140px;
+  margin-bottom: 10px;
 }
 
 .cellBox .dynamicList .content .userContent .site {
   color: #616C83;
-  font-size: 16px;
-  margin: 10px auto;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .cellBox .dynamicList .content .userContent .time {
   color: #7E7F80;
-  font-size: 14px;
+  font-size: 13px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -198,14 +208,44 @@
   right: 9px;
 }
 
-.cellBox .dynamicList .content .userContent .zanBox {
+.cellBox .dynamicList .content .userContent .zanCommitBox {
   box-sizing: border-box;
   background: #F7F7F7;
-  margin-top: 15px;
-  font-size: 12px;
-  padding: 5px 10px;
   border-radius: 3px;
+  margin-top: 15px;
+}
+
+.cellBox .dynamicList .content .userContent .zanCommitBox .zanBox {
+  padding: 5px 10px;
   color: #5B6A91;
+}
+
+.cellBox .dynamicList .content .userContent .zanCommitBox .zanBox .zanName {
+  font-size: 14px;
+}
+
+.cellBox .dynamicList .content .userContent .zanCommitBox .zanBox .zanName:last-child .zanMark {
+  display: none;
+}
+
+.cellBox .dynamicList .content .userContent .zanCommitBox .commitBox {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-top: 1px solid #ededed;
+}
+
+.cellBox .dynamicList .content .userContent .zanCommitBox .commitBox .commitList {
+  padding: 3px 0;
+}
+
+.cellBox .dynamicList .content .userContent .zanCommitBox .commitBox .commitList .commitName {
+  color: #5B6A91;
+  margin-right: 2px;
+}
+
+.cellBox .dynamicList .content .userContent .zanCommitBox .commitBox .commitList .commitText {
+  color: #303030;
+  font-size: 13px;
 }
 
 .dialog img {

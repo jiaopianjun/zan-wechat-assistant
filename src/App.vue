@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header class="lf lf-j-b">
+      <el-header class="lf lf-j-b head">
         <span>demo</span>
       </el-header>
       <el-main>
@@ -38,6 +38,7 @@ body {
   color: #fff;
   text-align: center;
   line-height: 60px;
+  font-size: 30px;
 }
 .el-main {
   padding: 20px 0;
