@@ -60,3 +60,14 @@
 .w120 {
     width: 120px !important;
 }
+
+
+/* 清除默认样式 */
+.el-form-item__label {
+    font-size: 25px;
+}
+.el-input--medium .el-input__inner {
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+}

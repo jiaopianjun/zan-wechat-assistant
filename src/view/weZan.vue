@@ -1,21 +1,21 @@
 <template>
   <div class="home">
     <!-- 昵称头像 -->
-    <el-form ref="parmas" label-position="top" :model="parmas" label-width="80px" v-if="zanFlag">
+    <el-form ref="parmas" label-position="top" :model="parmas" label-width="2rem" v-if="zanFlag">
       <el-form-item label="微信昵称和头像">
         <el-row :gutter="24" class="h100">
           <el-col :span="16">
-            <el-input v-model="parmas.name" placeholder="请输入昵称" />
+            <el-input v-model="parmas.name" placeholder="请输入昵称" size="medium"/>
           </el-col>
-          <el-col :span="8" class="lf lf-j">
+          <el-col :span="8" class="lf lf-j h50">
             <el-upload
-              class="avatar-uploader"
+              class="avatar-uploader h50"
               :show-file-list="false"
               action
               :before-upload="beforeAvatarUpload"
             >
               <img v-if="parmas.headImg" :src="parmas.headImg" class="avatar" />
-              <el-button icon="el-icon-upload" v-else type="primary">微信头像</el-button>
+              <el-button icon="el-icon-upload" v-else type="primary" class="h50">微信头像</el-button>
             </el-upload>
           </el-col>
         </el-row>
@@ -535,9 +535,7 @@ export default {
       let contentType = parts[0].split(":")[1];
       let raw = window.atob(parts[1]);
       let rawLength = raw.length;
-
       let uInt8Array = new Uint8Array(rawLength);
-
       for (let i = 0; i < rawLength; ++i) {
         uInt8Array[i] = raw.charCodeAt(i);
       }
@@ -555,13 +553,15 @@ body {
   background: #d9d9d9;
 }
 .home {
-  min-height: 500px;
+  min-height: 7rem;
   width: 750px;
+  /* max-width: 1500px; */
   margin: 0 auto;
   box-sizing: border-box;
   padding: 15px;
   background: #fff;
   border-radius: 4px;
+  font-size: 0;
 }
 .avatar-uploader {
   box-sizing: border-box;
@@ -576,16 +576,16 @@ body {
   border-color: #409eff;
 }
 .home .avatar-uploader-icon {
-  font-size: 28px;
+  font-size: 2rem;
   color: #8c939d;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
   text-align: center;
 }
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 1rem;
+  height: 1rem;
   display: block;
 }
 .pic {
@@ -595,8 +595,8 @@ body {
 }
 .imgPic {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 1rem;
+  height: 1rem;
   margin: 0 15px 15px 0;
   box-sizing: border-box;
   border: 1px solid #e8eaec;

@@ -11,18 +11,26 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
     "html2canvas": "^1.0.0-rc.5",
+    "postcss-pxtorem": "^5.1.1",
     "sass": "^1.26.10",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.0",
     "@vue/cli-plugin-eslint": "^4.4.0",
+    "@vue/cli-plugin-router": "^4.5.6",
+    "@vue/cli-plugin-vuex": "^4.5.6",
     "@vue/cli-service": "^4.4.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "lib-flexible": "0.3.2",
     "node-sass": "^4.14.1",
+    "postcss-pxtrem": "3.0.3",
     "sass-loader": "^9.0.2",
+    "vue-cli-plugin-postcss-pxtrem": "^1.0.6",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -44,4 +52,5 @@
     "last 2 versions",
     "not dead"
   ]
+
 }
