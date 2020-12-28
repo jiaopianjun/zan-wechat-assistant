@@ -4,16 +4,115 @@
     background: #fff;
     margin: 0 auto;
     box-sizing: border-box;
+
     .phoneBar {
+        position: relative;
         height: 30px;
         width: 100%;
         display: flex;
-        background: red;
+        position: relative;
+        z-index: 2;
+        .iphoneBar {
+            width: 100%;
+            padding-left: 10px;
+            height: 100%;
+            color: #fff;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+                display: inline-block;
+                display: flex;
+                align-items: center;
+                height: 30px;
+            }
+            img {
+                max-width: 23px;
+            }
+            .ispIcon {
+                max-width: 20px;
+            }
+            .ispText {
+                font-size: 16px;
+                margin: 0 5px;
+            }
+            .barTime {
+                left: 0;
+                top: 0;
+                position: absolute;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                display: inline-block !important;
+                text-align: center;
+            }
+            .barTime,
+            .batteryText {
+                font-size: 15px;
+            }
+            .batteryIcon {
+                img {
+                    max-width: 32px;
+                    height: 14px;
+                    position: relative;
+                    top: 2px;
+                    margin-left: 4px;
+                }
+            }
+            .barRight {
+                display: flex;
+                align-items: center;
+                span {
+                    margin-right: 4px;
+                }
+            }
+        }
+        .androidBar {
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+                display: inline-block;
+                display: flex;
+                align-items: center;
+            }
+            
+            .barTime {
+                padding-left: 4px;
+            }
+            .barRight {
+                display: flex;
+                align-items: center;
+                span {
+                    margin-right: 4px;
+                }
+            }
+            img {
+                max-width: 24px;
+            }
+            .ispIcon {
+                img {
+                    max-width: 18px;
+                }
+            }
+            .bluetoothIcon {
+                img {
+                    max-width: 20px;
+                }
+            }
+        }
     }
+
     .momentsBg {
         position: relative;
         width: 100%;
         height: 400px;
+
         .bgBox {
             position: absolute;
             top: 0;
@@ -24,32 +123,43 @@
             z-index: 1;
             display: flex;
             align-items: flex-end;
+
             img {
                 max-width: 100%;
             }
         }
+
         .bgTop {
-            height: 60px;
+            height: 40px;
             position: relative;
             z-index: 2;
-            padding: 0 20px;
+            padding-right: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: pink;
             box-sizing: border-box;
             margin: 0 auto;
-            .back {
-                width: 40px;
-                height: 40px;
-                background: yellow
+
+            .back{
+                width: 30px;
+                height: 30px;
+                padding-left: 2px;
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
             }
+
             .camera {
-                width: 40px;
-                height: 40px;
-                background: yellow
+                width: 30px;
+                height: 30px;
+
+                img {
+                    max-width: 30px;
+                }
             }
         }
+
         .userInfo {
             position: absolute;
             z-index: 2;
@@ -60,6 +170,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
+
             .headPic {
                 width: 80px;
                 height: 80px;
@@ -67,10 +178,12 @@
                 margin-left: 15px;
                 border-radius: 4px;
                 overflow: hidden;
+
                 img {
                     max-width: 100%;
                 }
             }
+
             .name {
                 color: #fff;
                 font-weight: 400;
@@ -88,6 +201,7 @@
         align-items: center;
         justify-content: space-between;
         color: #18191A;
+
         .newDynamicHeadPid {
             width: 30px;
             height: 30px;
@@ -99,22 +213,27 @@
         box-sizing: border-box;
         padding: 15px;
         border-bottom: 1px solid #ededed;
+
         .content {
             width: 100%;
             margin-bottom: 15px;
             display: flex;
+
             .userHeadPic {
                 width: 60px;
                 height: 60px;
                 overflow: hidden;
                 border-radius: 4px;
                 margin-right: 10px;
+
                 img {
                     max-width: 100%;
                 }
             }
+
             .userContent {
                 flex: 1;
+
                 .userName {
                     font-weight: 500;
                     color: #5D6A8C;
@@ -128,18 +247,22 @@
                     margin: 3px 0;
                     margin-bottom: 10px;
                 }
+
                 .userPic {
                     // margin-bottom: 10px;
                 }
+
                 .onePic {
                     img {
                         max-width: 65%;
                     }
                 }
+
                 .morePic {
                     display: grid;
                     grid-template-columns: 150px 150px 140px;
                     max-width: 72%;
+
                     img {
                         width: 140px;
                         height: 140px;
@@ -153,12 +276,14 @@
                     font-size: 14px;
                     margin-bottom: 10px;
                 }
+
                 .time {
                     color: #7E7F80;
                     font-size: 13px;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+
                     .timeIcon {
                         position: relative;
                         display: inline-block;
@@ -166,8 +291,9 @@
                         height: 20px;
                         background: #F7F8F9;
                         border-radius: 4px;
+
                         &::after,
-                        &::before{
+                        &::before {
                             position: absolute;
                             content: '';
                             width: 5px;
@@ -177,24 +303,30 @@
                             top: 50%;
                             transform: translateY(-50%);
                         }
+
                         &::after {
                             left: 9px;
                         }
+
                         &::before {
                             right: 9px;
                         }
                     }
                 }
+
                 .zanCommitBox {
                     box-sizing: border-box;
                     background: #F7F7F7;
                     border-radius: 3px;
                     margin-top: 15px;
+
                     .zanBox {
                         padding: 5px 10px;
                         color: #5B6A91;
+
                         .zanName {
                             font-size: 14px;
+
                             &:last-child {
                                 .zanMark {
                                     display: none;
@@ -202,16 +334,20 @@
                             }
                         }
                     }
+
                     .commitBox {
                         padding: 5px 10px;
                         font-size: 14px;
                         border-top: 1px solid #ededed;
+
                         .commitList {
                             padding: 3px 0;
+
                             .commitName {
                                 color: #5B6A91;
                                 margin-right: 2px;
                             }
+
                             .commitText {
                                 color: #303030;
                                 font-size: 13px;
@@ -222,11 +358,11 @@
 
             }
         }
-        
+
     }
 }
 
-.dialog{
+.dialog {
     img {
         max-width: 100%;
     }

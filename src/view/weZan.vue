@@ -5,7 +5,7 @@
       <el-form-item label="微信昵称和头像">
         <el-row :gutter="24" class="h100">
           <el-col :span="16">
-            <el-input v-model="parmas.name" placeholder="请输入昵称" size="medium"/>
+            <el-input v-model="parmas.name" placeholder="请输入昵称" size="medium" />
           </el-col>
           <el-col :span="8" class="lf lf-j h50">
             <el-upload
@@ -50,7 +50,7 @@
             <el-input
               type="textarea"
               :autosize="{ minRows: 4, maxRows: 20}"
-              placeholder="请输入文字内容(关注公众号：故事胶片)"
+              placeholder="请输入文字内容(关注公众号：卖坚果的怪叔叔)"
               v-model="parmas.content"
             ></el-input>
           </el-col>
@@ -231,6 +231,7 @@
           icon="el-icon-circle-plus"
         >添加评论</el-button>
       </el-form-item>
+
       <!-- 是否通知栏 -->
       <el-form-item label="是否有通知栏">
         <el-switch v-model="parmas.isNavbar" active-text="是" inactive-text="否"></el-switch>
@@ -245,6 +246,19 @@
           </el-col>
         </el-row>
       </el-form-item>
+      <el-form-item v-if="parmas.isNavbar">
+        <el-row :gutter="24" class="h100">
+          <el-col>
+            <el-form-item label="发布时间">
+              <el-time-picker
+                v-model="parmas.navBarOpt.time"
+                value-format="HH:mm"
+                placeholder="选择日期时间"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form-item>
       <!-- 生成 -->
       <el-button round style="width: 100%" type="primary" class="genbtn" @click="genHot">生成</el-button>
     </el-form>
@@ -256,17 +270,58 @@
       id="imageWrapper"
       v-if="!zanFlag && parmas.zanType == '2'"
     >
-      <!-- 通知栏 -->
-      <div class="phoneBar"></div>
       <!-- 朋友圈背景 -->
       <div class="momentsBg">
+        <!-- 通知栏 -->
+        <div class="phoneBar" v-if="parmas.isNavbar">
+          <div class="iphoneBar" v-if="parmas.navbarType == 1">
+            <span class="barLeft">
+              <span class="ispIcon">
+                <img src="../assets/image/opt/signal.png" alt />
+              </span>
+              <span class="ispText">中国电信</span>
+              <span class="wifiIcon">
+                <img src="../assets/image/opt/wifi.png" alt />
+              </span>
+            </span>
+            <span class="barTime">{{parmas.navBarOpt.time}}</span>
+            <span class="barRight">
+              <span class="batteryText">55%</span>
+              <span class="batteryIcon">
+                <img src="../assets/image/opt/ioscell.png" alt />
+              </span>
+            </span>
+          </div>
+          <div class="androidBar" v-if="parmas.navbarType == 0">
+            <span class="barTime">{{parmas.navBarOpt.time}}</span>
+            <span class="barRight">
+              <span class="netSpeed">3.5K/s</span>
+              <span class="bluetoothIcon">
+                <img src="../assets/image/opt/bluetooth.png" alt />
+              </span>
+              <span class="ispIcon">
+                <img src="../assets/image/opt/andsignal.png" alt />
+              </span>
+              <span class="wifiIcon">
+                <img src="../assets/image/opt/andwifi.png" alt />
+              </span>
+              <span class="batteryIcon">
+                <img src="../assets/image/opt/cell.png" alt />
+              </span>
+            </span>
+          </div>
+        </div>
         <div class="bgBox">
           <img src="../assets/image/default/bg.jpeg" alt />
         </div>
         <!-- 顶部返回 -->
         <div class="bgTop">
-          <span class="back"></span>
-          <span class="camera"></span>
+          <span class="back">
+            <img src="../assets/image/opt/back.png" alt />
+          </span>
+          <span class="camera">
+            <img src="../assets/image/opt/camera.png" alt />
+          </span>
         </div>
         <!-- 用户名字头像 -->
         <div class="userInfo">
@@ -348,6 +403,14 @@
       @click="screenHot"
       v-if="!zanFlag"
     >生成截图</el-button>
+    <el-button
+      round
+      style="width: 100%"
+      type="info"
+      class="genbtn"
+      @click="backset"
+      v-if="!zanFlag"
+    >返回</el-button>
     <!-- 图片生成弹窗 -->
     <el-dialog title="下载" :visible.sync="dialogVisible" width="80%">
       <div class="dialog">
@@ -392,12 +455,8 @@ export default {
         commit: [],
         navbarType: 0, // 0 安卓 1 苹果
         isNavbar: false,
-        navBar: {
-          time: "",
-          battery: "",
-          signal: "",
-          isp: "",
-          bluetooth: ""
+        navBarOpt: {
+          time: ""
         }
       },
       imgUrl: "",
@@ -486,6 +545,10 @@ export default {
 
       this.parmas.zanList = this.zanName.splice(1, this.parmas.zanNum);
       this.zanFlag = false;
+    },
+    // 返回设置
+    backset() {
+      this.zanFlag = true;
     },
     // 生成截图
     screenHot() {
@@ -617,5 +680,7 @@ body {
 .genbtn {
   height: 60px;
   font-size: 30px !important;
+  margin-left: 0 !important;
+  margin-bottom: 20px !important;
 }
 </style>

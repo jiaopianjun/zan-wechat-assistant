@@ -7,10 +7,117 @@
 }
 
 .cellBox .phoneBar {
+  position: relative;
   height: 30px;
   width: 100%;
   display: flex;
-  background: red;
+  position: relative;
+  z-index: 2;
+}
+
+.cellBox .phoneBar .iphoneBar {
+  width: 100%;
+  padding-left: 10px;
+  height: 100%;
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cellBox .phoneBar .iphoneBar span {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.cellBox .phoneBar .iphoneBar img {
+  max-width: 23px;
+}
+
+.cellBox .phoneBar .iphoneBar .ispIcon {
+  max-width: 20px;
+}
+
+.cellBox .phoneBar .iphoneBar .ispText {
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+.cellBox .phoneBar .iphoneBar .barTime {
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block !important;
+  text-align: center;
+}
+
+.cellBox .phoneBar .iphoneBar .barTime,
+.cellBox .phoneBar .iphoneBar .batteryText {
+  font-size: 15px;
+}
+
+.cellBox .phoneBar .iphoneBar .batteryIcon img {
+  max-width: 32px;
+  height: 14px;
+  position: relative;
+  top: 2px;
+  margin-left: 4px;
+}
+
+.cellBox .phoneBar .iphoneBar .barRight {
+  display: flex;
+  align-items: center;
+}
+
+.cellBox .phoneBar .iphoneBar .barRight span {
+  margin-right: 4px;
+}
+
+.cellBox .phoneBar .androidBar {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cellBox .phoneBar .androidBar span {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+}
+
+.cellBox .phoneBar .androidBar .barTime {
+  padding-left: 4px;
+}
+
+.cellBox .phoneBar .androidBar .barRight {
+  display: flex;
+  align-items: center;
+}
+
+.cellBox .phoneBar .androidBar .barRight span {
+  margin-right: 4px;
+}
+
+.cellBox .phoneBar .androidBar img {
+  max-width: 24px;
+}
+
+.cellBox .phoneBar .androidBar .ispIcon img {
+  max-width: 18px;
+}
+
+.cellBox .phoneBar .androidBar .bluetoothIcon img {
+  max-width: 20px;
 }
 
 .cellBox .momentsBg {
@@ -36,28 +143,35 @@
 }
 
 .cellBox .momentsBg .bgTop {
-  height: 60px;
+  height: 40px;
   position: relative;
   z-index: 2;
-  padding: 0 20px;
+  padding-right: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: pink;
   box-sizing: border-box;
   margin: 0 auto;
 }
 
 .cellBox .momentsBg .bgTop .back {
-  width: 40px;
-  height: 40px;
-  background: yellow;
+  width: 30px;
+  height: 30px;
+  padding-left: 2px;
+}
+
+.cellBox .momentsBg .bgTop .back img {
+  width: 30px;
+  height: 30px;
 }
 
 .cellBox .momentsBg .bgTop .camera {
-  width: 40px;
-  height: 40px;
-  background: yellow;
+  width: 30px;
+  height: 30px;
+}
+
+.cellBox .momentsBg .bgTop .camera img {
+  max-width: 30px;
 }
 
 .cellBox .momentsBg .userInfo {
