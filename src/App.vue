@@ -2,13 +2,13 @@
   <div id="app">
     <el-container>
       <el-header class="lf lf-j-b head">
-        <span>demo</span>
+        <span>微信集赞神器</span>
       </el-header>
       <el-main>
         <weZan />
       </el-main>
       <el-footer class="lf lf-a lf-j">
-        <span>demo-demo-demo</span>
+        <span>公众号：卖坚果的怪叔叔</span>
       </el-footer>
     </el-container>
   </div>

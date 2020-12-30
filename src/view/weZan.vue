@@ -433,7 +433,7 @@ export default {
     return {
       zanNum: [],
       parmas: {
-        name: "故事胶片",
+        name: "卖坚果的怪叔叔",
         headImg: "",
         zanType: 2,
         contentType: 1,
