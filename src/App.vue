@@ -8,7 +8,7 @@
         <weZan />
       </el-main>
       <el-footer class="lf lf-a lf-j">
-        <span>demo-demo-demo</span>
+        <span>朋友圈集赞神器</span>
       </el-footer>
     </el-container>
   </div>
