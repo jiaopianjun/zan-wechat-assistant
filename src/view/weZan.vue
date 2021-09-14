@@ -265,8 +265,12 @@
         </div>
         <!-- 顶部返回 -->
         <div class="bgTop">
-          <span class="back"></span>
-          <span class="camera"></span>
+          <span class="back">
+            <img src="../assets/image/icon/arrow_white.png" alt="">
+          </span>
+          <span class="camera">
+            <img src="../assets/image/icon/creama_white.png" alt="">
+          </span>
         </div>
         <!-- 用户名字头像 -->
         <div class="userInfo">
