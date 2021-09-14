@@ -325,6 +325,7 @@
               <!-- 赞 -->
               <div class="zanBox">
                 <span class="zanIcon"></span>
+                <span class="pl35"></span>
                 <span class="zanName" v-for="(list, index) in parmas.zanList" :key="index">
                   {{list}}<span class="zanMark">，</span>
                 </span>

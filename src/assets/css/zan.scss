@@ -196,6 +196,9 @@
                         // display: flex;
                         // flex-wrap: wrap;
                         position: relative;
+                        .pl35 {
+                            padding-left: 35px;
+                        }
                         .zanIcon {
                             position: absolute;
                             top: 8px;
@@ -209,6 +212,7 @@
                             font-size: 14px;
                             &:first-child {
                                 padding-left: 25px;
+                                color: red;
                             }
                             &:last-child {
                                 .zanMark {
@@ -216,7 +220,7 @@
                                 }
                             }
                             .zanMark {
-                                margin-left: -5px;
+                                margin-right: -5px;
                             }
                         }
                     }
