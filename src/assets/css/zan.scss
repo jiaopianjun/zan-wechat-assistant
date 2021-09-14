@@ -193,9 +193,12 @@
                     .zanBox {
                         padding: 5px 10px;
                         color: #5B6A91;
-                        display: flex;
-                        flex-wrap: wrap;
+                        // display: flex;
+                        // flex-wrap: wrap;
+                        position: relative;
                         .zanIcon {
+                            position: absolute;
+                            top: 8px;
                             display: inline-block;
                             width: 20px;
                             height: 20px;
@@ -204,10 +207,16 @@
                         }
                         .zanName {
                             font-size: 14px;
+                            &:first-child {
+                                padding-left: 25px;
+                            }
                             &:last-child {
                                 .zanMark {
                                     display: none;
                                 }
+                            }
+                            .zanMark {
+                                margin-left: -5px;
                             }
                         }
                     }
