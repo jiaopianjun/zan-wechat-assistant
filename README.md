@@ -14,6 +14,6 @@
 
 随你赞
 
-小夭塔
+集赞助手
 
 [介绍看这里](https://web.lieme.cn/xyt/index.html)
